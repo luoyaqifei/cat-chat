@@ -20,6 +20,7 @@ router.post("/", (req, res) => {
     const existedUser = users.find(u => u.email === user.email);
     if (existedUser) {
         res.send({...existedUser, existed: true});
+        return;
     }
     user.id = uuidv4();
     users.push(user);
