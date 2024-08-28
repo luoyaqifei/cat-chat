@@ -1,5 +1,6 @@
 @use './styles/__variables.scss' as *;
 body {
+    box-sizing: border-box;
     background-color: $color-black;
     color: $color-white;    
 }
