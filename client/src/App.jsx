@@ -1,31 +1,26 @@
 import "./App.scss";
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { io } from "socket.io-client";
+import UserRegister from "./pages/UserRegister/UserRegister";
 import Home from "./pages/Home/Home";
 import Chat from "./pages/Chat/Chat";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { SocketProvider } from "./hooks/SocketContext";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <div className="app">
       <SocketProvider>
         <BrowserRouter>
-          <Header />
+          <Header user={user}/>
           <Routes>
-            {/* TODO: 
-                *Add new page/route that is a form to take in user-input that asks for: 
-                  -displayed username
-                  -email (for auth.)
-
-                  -add user info to localStorage! --> extra/nice-to-have
-                  -as part of new-user feature, display username side messages in chat 
-                *Redirect to register page
-             */}
-            <Route path="/" element={<Home />} />
-            <Route path="/chat/:channelId" element={<Chat />} />
+            <Route path="/register" element={<UserRegister setUser={setUser} />} />
+            <Route path="/" element={<Home user={user}/>} />
+            {/** TODO: we need to add the user info to the chat */}
+            <Route path="/chat/:channelId" element={<Chat user={user}/>} />
           </Routes>
           <Footer />
         </BrowserRouter>

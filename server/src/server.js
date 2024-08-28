@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import cors from "cors";
 import axios from "axios";
 import channels from "./routes/channels.js";
+import users from "./routes/users.js";
 const app = express();
 
 const server = createServer(app);
@@ -23,16 +24,15 @@ app.get("/", (req, res) => {
 });
 
 app.use("/channels", channels);
+app.use("/users", users);
 
 io.on("connection", async (socket) => {
-//   const { data } = await axios.get("https://catfact.ninja/fact");
-//   socket.broadcast.emit(data);
   console.log("a user connected");
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
   socket.on("chat message", (msg) => {
-    console.log("msg" + JSON.stringify(msg))
+    console.log("msg" + msg)
     io.emit("chat message", msg);
   });
 });
