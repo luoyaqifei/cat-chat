@@ -25,7 +25,7 @@ export default function RandomCatImage() {
         );
     }
     else {
-        return <div>Loading....</div>;
+        return <div>Cat image loading....</div>;
     }
 
 }
