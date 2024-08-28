@@ -1,0 +1,106 @@
+.channels {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: #e0e0e0;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #2a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #3a3a3a;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    &__list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    &__item {
+        margin-bottom: 10px;
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateX(5px);
+        }
+    }
+
+    &__item {
+        a {
+            text-decoration: none;
+            color: #4a90e2;
+            font-weight: 500;
+            transition: color 0.2s ease-in-out;
+            display: block;
+            width: 100%;
+            
+            &:hover {
+                color: #66b3ff;
+                text-decoration: none;
+            }
+        }
+    }
+
+    h2 {
+        color: #ffffff;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        @media (max-width: 480px) {
+            font-size: 1.2em;
+        }
+    }
+
+    .new-channel {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        width: 100%;
+
+        @media (max-width: 480px) {
+            flex-direction: column;
+        }
+
+        input {
+            background-color: #333333;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: #ffffff;
+            flex-grow: 1;
+
+            &::placeholder {
+                color: #888888;
+            }
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: #ffffff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+
+            @media (max-width: 480px) {
+                width: 100%;
+            }
+
+            &:hover {
+                background-color: #66b3ff;
+            }
+        }
+    }
+}

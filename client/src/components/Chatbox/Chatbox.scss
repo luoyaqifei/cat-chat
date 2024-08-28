@@ -1,0 +1,55 @@
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    
+    &__messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+    }
+    
+    &__message {
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        color: #333; // Add a dark color for the text
+    }
+    
+    &__form {
+        display: flex;
+    }
+    
+    &__input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        font-size: 16px;
+        
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    }
+    
+    &__submit {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-size: 16px;
+        
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+}

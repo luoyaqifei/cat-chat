@@ -1,5 +1,5 @@
-$color-black: #161616;
-$color-white: #fff;
+@use '../../styles/__variables.scss' as *;
+
 $size: 170px; // (Fully responsive)
 
 .cat-face {
