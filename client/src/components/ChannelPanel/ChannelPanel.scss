@@ -12,10 +12,12 @@
     padding: 15px;
     border-radius: 8px;
     border: 1px solid #3a3a3a;
-
+    
     @media (max-width: 768px) {
-        width: 100%;
+        // width: 100%;
+        width: 80%;
         margin-bottom: 20px;
+        
     }
 
     &__list {
@@ -37,14 +39,16 @@
     &__item {
         a {
             text-decoration: none;
-            color: #4a90e2;
+            color: rgb(30, 180, 180);
+            // #4a90e2;
             font-weight: 500;
             transition: color 0.2s ease-in-out;
             display: block;
             width: 100%;
             
             &:hover {
-                color: #66b3ff;
+                color: teal;
+                // #66b3ff;
                 text-decoration: none;
             }
         }
@@ -86,7 +90,7 @@
         }
 
         button {
-            background-color: #4a90e2;
+            background-color: teal;
             color: #ffffff;
             border: none;
             padding: 8px 12px;
@@ -99,7 +103,8 @@
             }
 
             &:hover {
-                background-color: #66b3ff;
+                background-color: teal;
+                // #66b3ff;
             }
         }
     }
