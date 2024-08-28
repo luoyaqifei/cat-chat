@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSocket } from "../../hooks/SocketContext";
 import { useParams } from "react-router-dom";
 import "./Chatbox.scss";
+import axios from "axios";
 
 
-const Chatbox = () => {
+const Chatbox = ({user}) => {
   const { channelId } = useParams();
   const socket = useSocket();
   const [messages, setMessages] = useState([]);
@@ -12,9 +13,10 @@ const Chatbox = () => {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("chat message", ({channelId: msgChannelId, message: msg}) => {
+    socket.on("chat message", async ({channelId: msgChannelId, message: msg, userId}) => {
       if (msgChannelId == channelId) {
-        setMessages((prevMessages) => [...prevMessages, msg]);
+        const users = (await axios.get("http://localhost:3000/users")).data;
+        setMessages((prevMessages) => [...prevMessages, {msg, username: users.find(i => i.id === userId)?.username}]);
       };
     });
 
@@ -28,7 +30,7 @@ const Chatbox = () => {
     e.preventDefault();
     const message = e.target.message.value;
     if (message.trim() !== "") {
-      socket.emit("chat message", {channelId, message});
+      socket.emit("chat message", {channelId, message, userId: user.id});
       e.target.message.value = "";
     }
   }
@@ -37,7 +39,10 @@ const Chatbox = () => {
     <div className="chatbox">
       <ul className="chatbox__messages">
         {messages.map((msg, index) => (
-          <li key={index} className="chatbox__message">{msg}</li>
+          <li key={index} className="chatbox__message">
+            <h4>{msg.username}</h4>
+            <p>{msg.msg}</p>
+            </li>
         ))}
       </ul>
       <form className="chatbox__form" onSubmit={sendMessage}>

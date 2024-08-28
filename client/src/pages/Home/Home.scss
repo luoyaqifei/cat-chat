@@ -11,6 +11,8 @@
     &__right {
         display:flex;
         flex-direction: column;
+
+        flex-grow: 1;
     }
 
     @media (min-width: 481px) {
