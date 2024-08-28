@@ -3,6 +3,7 @@ import { Server } from "socket.io";
 import { createServer } from "node:http";
 import cors from "cors";
 import axios from "axios";
+import channels from "./routes/channels.js";
 const app = express();
 
 const server = createServer(app);
@@ -15,10 +16,13 @@ const io = new Server(server, {
   },
 });
 
+app.use(express.json());
 app.use(cors());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+
+app.use("/channels", channels);
 
 io.on("connection", async (socket) => {
 //   const { data } = await axios.get("https://catfact.ninja/fact");
