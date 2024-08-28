@@ -1,10 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 import "./ChannelPanel.scss";
 
 export default function Channels() {
-  //TODO: change hard-coded sections to have front-end and back-end support? --> host channels in back-end  
-  const [channels, setChannels] = useState([{ id: "123", name: "ginger" }]);
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => { 
+    const fetchChannels = async () => {
+      const response = await axios.get("http://localhost:3000/channels");
+      setChannels(response.data);
+    } 
+
+    fetchChannels(); 
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const createChannel = async () => {
+      const pckg = { name: e.target.channelName.value } 
+      const response = await axios.post("http://localhost:3000/channels", pckg);
+      setChannels(channels.concat(response.data));
+      e.target.reset();
+    }
+
+    createChannel();
+  }
+
   const channelElements = channels.map((channel) => {
     return (
       <li className="channels__item" key={channel.id}>
@@ -12,16 +34,17 @@ export default function Channels() {
       </li>
     );
   });
+
+
   return (
     <div className="channels">
       <h2>Channels</h2>
       <ul className="channels__list">{channelElements}</ul>
 
-      {/* TODO: ON FRONT-END ADD FORM FOR USER INPUT */}
-      <div className="new-channel">
-        <input type="text" placeholder="New channel name" />
-        <button>+</button>
-      </div>
+      <form className="new-channel" onSubmit={handleSubmit}>
+        <input name="channelName" type="text" placeholder="New channel name" />
+        <button type="submit">+</button>
+      </form>
     </div>
   );
 }

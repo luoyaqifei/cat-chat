@@ -12,8 +12,10 @@ const Chatbox = () => {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on("chat message", ({channelId, message: msg}) => {
-      setMessages((prevMessages) => [...prevMessages, msg]);
+    socket.on("chat message", ({channelId: msgChannelId, message: msg}) => {
+      if (msgChannelId == channelId) {
+        setMessages((prevMessages) => [...prevMessages, msg]);
+      };
     });
 
     // Clean up the event listener when the component unmounts
